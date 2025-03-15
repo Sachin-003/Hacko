@@ -21,7 +21,7 @@ Ensure you have the following installed:
 
 ### ⚙️ Installation
 ```sh
-git clone https://github.com/your-repo/hacko.git
+git clone https://github.com/Sachin-003/Hacko.git
 cd hacko
 ```
 
