@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function TaskMainScreen(props) {
     
     const projectId = props.projectId;
@@ -19,7 +22,7 @@ export default function TaskMainScreen(props) {
     const create_new_task = async()=>{
         try{
 
-            const task = await axios.post(`http://localhost:5000/api/tasks/`,{
+            const task = await axios.post(`${API_URL}/api/tasks/`,{
                 projectId,
                 title,
                 description,
@@ -38,7 +41,7 @@ export default function TaskMainScreen(props) {
     const get_project_tasks = async()=>{
         try{
 
-            const tasks = await axios.get(`http://localhost:5000/api/tasks/${projectId}`);
+            const tasks = await axios.get(`${API_URL}/api/tasks/${projectId}`);
             setTasks(tasks.data);
 
         }
@@ -56,7 +59,7 @@ export default function TaskMainScreen(props) {
 
     const update_task_status = async (taskId, status) => {
         try {
-            const response = await axios.put(`http://localhost:5000/api/tasks/${taskId}`, {
+            const response = await axios.put(`${API_URL}/api/tasks/${taskId}`, {
                 status: status,
             });
             console.log(response.data); // Log the response data

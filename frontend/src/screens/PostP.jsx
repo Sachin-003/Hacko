@@ -3,7 +3,7 @@ import Select from "react-select";
 import { jwtDecode } from "jwt-decode"; // Correct import for version 4.0.0
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const API_URL = import.meta.env.VITE_API_URL;
 const options = [
   { value: "3D Modeling", label: "3D Modeling" },
   { value: "Agile Methodologies", label: "Agile Methodologies" },
@@ -117,7 +117,7 @@ export default function PostProject() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:5000/api/projects", {
+      const response = await axios.post(`${API_URL}/api/projects`, {
         title: projectName,
         description,
         owner: ownerId,

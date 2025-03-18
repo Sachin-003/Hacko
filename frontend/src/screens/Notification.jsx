@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode"; 
 import axios from "axios";
 import { User, Code, CheckCircle, XCircle } from "react-feather";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function Notification() {
     const [ownerId, setOwnerId] = useState(null);
     const [requests, setRequests] = useState([]);
@@ -26,7 +26,7 @@ export default function Notification() {
     const fetchJoinRequests = async () => {
         if (!ownerId) return;
         try {
-            const response = await axios.get(`http://localhost:5000/api/notifications/recipient/${ownerId}`);
+            const response = await axios.get(`${API_URL}/api/notifications/recipient/${ownerId}`);
             setRequests(response.data.data);
         } catch (err) {
             setError("Failed to fetch Notifications");
@@ -43,7 +43,7 @@ export default function Notification() {
     useEffect(() => {
         const fetchUserData = async (userId) => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/users/${userId}`);
+                const response = await axios.get(`${API_URL}/api/users/${userId}`);
                 setSendersData((prev) => ({ ...prev, [userId]: response.data.name }));
             } catch (err) {
                 console.error(err);
@@ -52,7 +52,7 @@ export default function Notification() {
 
         const fetchProjectData = async (projectId) => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/projects/${projectId}`);
+                const response = await axios.get(`${API_URL}/api/projects/${projectId}`);
                 setProjectData((prev) => ({ ...prev, [projectId]: response.data.title }));
             } catch (err) {
                 console.error(err);
@@ -67,7 +67,7 @@ export default function Notification() {
 
     const remove_from_request = async (project_id, sender_Id) => {
         try {
-            await axios.put(`http://localhost:5000/api/projects/${project_id}/remove_request`, { userId: sender_Id });
+            await axios.put(`${API_URL}/api/projects/${project_id}/remove_request`, { userId: sender_Id });
         } catch (err) {
             console.log(err);
         }
@@ -75,7 +75,7 @@ export default function Notification() {
 
     const delete_notification = async (notification_id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/notifications/${notification_id}`);
+            await axios.delete(`${API_URL}/api/notifications/${notification_id}`);
         } catch (err) {
             console.log(`Can't delete the notification: ${err}`);
         }
@@ -83,7 +83,7 @@ export default function Notification() {
 
     const add_member = async (project_id, sender_id) => {
         try {
-            await axios.put(`http://localhost:5000/api/projects/${project_id}/add_member`, { member_Id: sender_id });
+            await axios.put(`${API_URL}/api/projects/${project_id}/add_member`, { member_Id: sender_id });
         } catch (err) {
             console.log(`Can't add member: ${err}`);
         }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode"; 
 import axios from "axios";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function Profile() {
     const [ownerId, setOwnerId] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -20,7 +20,7 @@ export default function Profile() {
 
     const getUserDetails = async (ownerId) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/users/${ownerId}`);
+            const response = await axios.get(`${API_URL}/api/users/${ownerId}`);
             setUserData(response.data);
         } catch (err) {
             console.error("Unable to get user details:", err);

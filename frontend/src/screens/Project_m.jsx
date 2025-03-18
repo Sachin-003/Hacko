@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import TaskMainBody from "./taskMainBody";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function Project_m() {
     const { projectId } = useParams();
     const [ownerId, setOwnerId] = useState(null);
@@ -30,7 +30,7 @@ export default function Project_m() {
 
     const get_project_details = async () => {
         try {
-            const project = await axios.get(`http://localhost:5000/api/projects/${projectId}`);
+            const project = await axios.get(`${API_URL}/api/projects/${projectId}`);
             setProjectOwner(project.data.owner);
             setMembers(project.data.members);
             setSkills(project.data.skills);
@@ -43,7 +43,7 @@ export default function Project_m() {
 
     const get_tasks = async () => {
         try {
-            const tasks = await axios.get(`http://localhost:5000/api/tasks/${projectId}`);
+            const tasks = await axios.get(`${API_URL}/api/tasks/${projectId}`);
             console.log(`tasks : ${tasks.data}`);
         } catch (err) {
             console.log(err);
@@ -57,7 +57,7 @@ export default function Project_m() {
 
     const find_user_details = async (userId) => {
         try {
-            const userData = await axios.get(`http://localhost:5000/api/users/${userId}`);
+            const userData = await axios.get(`${API_URL}/api/users/${userId}`);
             return userData.data.name;
         } catch (err) {
             console.log(`Error in find_user_details : ${err}`);

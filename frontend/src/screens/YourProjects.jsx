@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { Code, Pocket, User, LogOut, Eye } from "react-feather";
 import { Link } from "react-router-dom";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function YourProjects() {
     const [ownerId, setOwnerId] = useState(null);
     const [projects, setProjects] = useState([]);
@@ -29,7 +29,7 @@ export default function YourProjects() {
         if (!ownerId) return;
         setLoading(true);
         try {
-          const response = await axios.get(`http://localhost:5000/api/projects/user/${ownerId}/projects`);
+          const response = await axios.get(`${API_URL}/api/projects/user/${ownerId}/projects`);
           setProjects(response.data);
         } catch (err) {
           setError("Failed to fetch projects");
@@ -47,7 +47,7 @@ export default function YourProjects() {
         const fetchProjectOwnerDetails = async (projectOwnerId) => {
           if (!ownerId) return;
           try {
-            const response = await axios.get(`http://localhost:5000/api/users/${projectOwnerId}`);
+            const response = await axios.get(`${API_URL}/api/users/${projectOwnerId}`);
             setOwnerNames((prevNames) => ({
               ...prevNames,
               [projectOwnerId]: response.data.name, 
@@ -75,7 +75,7 @@ export default function YourProjects() {
       };
     const deleteProject = async(projectId)=>{
       try{
-        const response = await axios.delete(`http://localhost:5000/api/projects/${projectId}`);
+        const response = await axios.delete(`${API_URL}/api/projects/${projectId}`);
         console.log(response);
 
       }
@@ -87,7 +87,7 @@ export default function YourProjects() {
     const remove_from_member = async(projectId)=>{
       try{
 
-        const response = await axios.put(`http://localhost:5000/api/projects/${projectId}/remove_member`,{
+        const response = await axios.put(`${API_URL}/api/projects/${projectId}/remove_member`,{
           member_Id : ownerId
         })
         console.log(response);

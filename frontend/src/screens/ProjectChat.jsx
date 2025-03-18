@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { jwtDecode } from "jwt-decode"; 
 import axios from "axios";
-const socket = io.connect("http://localhost:5000");
+const API_URL = import.meta.env.VITE_API_URL;
+const socket = io.connect(`${API_URL}`);
 
 export default function ProjectChat() {
     const { projectId } = useParams();
@@ -46,7 +47,7 @@ export default function ProjectChat() {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/messages/${projectId}`);
+                const response = await axios.get(`${API_URL}/messages/${projectId}`);
                 setMessages(response.data);
             } catch (error) {
                 console.error("Error fetching messages:", error);

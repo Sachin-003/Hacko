@@ -3,7 +3,7 @@ import Heading from "../components/heading";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function SignupForm({ setIsAuthenticated }){
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
@@ -18,7 +18,7 @@ export default function SignupForm({ setIsAuthenticated }){
             return;
         }
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/register', { 
+            const response = await axios.post(`${API_URL}/api/auth/register`, { 
                 "name": Username,
                 "email": Email,
                 "password": Password    

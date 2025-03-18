@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode"; 
 import axios from "axios";
 import { Code, Pocket, User, PlusCircle } from "react-feather";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function CollaborateScreen() {
   const [ownerId, setOwnerId] = useState(null);
@@ -26,7 +27,7 @@ export default function CollaborateScreen() {
     if (!ownerId) return;
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/api/projects/user/${ownerId}`);
+      const response = await axios.get(`${API_URL}/api/projects/user/${ownerId}`);
       setProjects(response.data.data);
     } catch (err) {
       setError("Failed to fetch projects");
@@ -44,7 +45,7 @@ export default function CollaborateScreen() {
     const fetchProjectOwnerDetails = async (projectOwnerId) => {
       if (!ownerId) return;
       try {
-        const response = await axios.get(`http://localhost:5000/api/users/${projectOwnerId}`);
+        const response = await axios.get(`${API_URL}/api/users/${projectOwnerId}`);
         setOwnerNames((prevNames) => ({
           ...prevNames,
           [projectOwnerId]: response.data.name, 
@@ -63,7 +64,7 @@ export default function CollaborateScreen() {
 
   const projectJoinRequest = async (recipient, sender, project) => {
     try {
-      await axios.post("http://localhost:5000/api/notifications", {
+      await axios.post(`${API_URL}/api/notifications`, {
         recipient, 
         sender,
         type: "Join Request",
@@ -77,7 +78,7 @@ export default function CollaborateScreen() {
   const updaterequests = async (projectId) => {
     if (!ownerId || !projectId) return;
     try {
-      await axios.put(`http://localhost:5000/api/projects/${projectId}/request`, {
+      await axios.put(`${API_URL}/api/projects/${projectId}/request`, {
         userId: ownerId,
       });
     } catch (err) {

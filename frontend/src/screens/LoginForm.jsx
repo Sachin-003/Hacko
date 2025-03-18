@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function LoginForm({ setIsAuthenticated }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +21,7 @@ export default function LoginForm({ setIsAuthenticated }) {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+            const response = await axios.post(`${API_URL}/api/auth/login`, { email, password });
 
             localStorage.setItem('token', response.data.token);
             setIsAuthenticated(true);
