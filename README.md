@@ -1,9 +1,10 @@
 # 🚀 Hacko
 
-Hacko is a **developer collaboration platform** built using the **MERN stack**. It enables efficient **task management** and **team coordination**. 🛠️💡
+Hacko is a **developer collaboration platform** built using the **MERN stack**. It enables efficient **task management**, **team coordination**, and now supports **group project chat**. 🛠️💡
 
 ## ✨ Features
 - ✅ **Task and project management**
+- 💬 **Real-time group chat** for seamless team communication
 - 🔒 **JWT-based authentication** for secure user sessions
 
 ## 🏗️ Tech Stack
@@ -11,6 +12,7 @@ Hacko is a **developer collaboration platform** built using the **MERN stack**. 
 - 🛠️ **Backend:** Node.js, Express
 - 🗄️ **Database:** MongoDB
 - 🔑 **Authentication:** JSON Web Tokens (JWT)
+- 🔄 **Real-time Chat:** WebSockets (Socket.io)
 
 ## 🚀 Getting Started
 
@@ -48,4 +50,3 @@ cd backend && nodemon server.js
 ```sh
 cd frontend && npm run dev
 ```
-
