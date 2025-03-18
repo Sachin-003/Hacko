@@ -132,7 +132,7 @@ export default function YourProjects() {
                   >
                     <LogOut size={16} /> Leave Project
                   </button>
-                  <Link to={`/Project_m/${project._id}`}>
+                  <Link to={`/Project_m/${project._id}/home`}>
                     <button className="flex items-center gap-2 text-cyan-600 border border-cyan-600 bg-white px-4 py-2 rounded-lg hover:bg-cyan-700 hover:text-white transition">
                       <Eye size={16} /> View Project
                     </button>

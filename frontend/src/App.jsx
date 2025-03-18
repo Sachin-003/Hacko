@@ -4,6 +4,7 @@ import Home from './screens/Home';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Project_m from './screens/Project_m';
+import ProjectChat from './screens/ProjectChat';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
@@ -33,7 +34,8 @@ function App() {
                 />
                 <Route path="/Signup" element={<Signup setIsAuthenticated={setIsAuthenticated}/>} />
                 <Route path="/Home/*" element={<Home setIsAuthenticated={setIsAuthenticated} />} />
-                <Route path = "/Project_m/:projectId/*" element = {<Project_m/>}/>
+                <Route path = "/Project_m/:projectId/home" element = {<Project_m/>}/>
+                <Route path = "/Project_m/:projectId/home/chat" element = {<ProjectChat/>}/>
             </Routes>
         </Router>
     );

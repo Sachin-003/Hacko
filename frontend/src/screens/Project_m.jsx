@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {useParams } from "react-router-dom";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode"; 
+import { useParams, Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import TaskMainBody from "./taskMainBody";
 
@@ -59,10 +58,10 @@ export default function Project_m() {
     const find_user_details = async (userId) => {
         try {
             const userData = await axios.get(`http://localhost:5000/api/users/${userId}`);
-            return userData.data.name; 
+            return userData.data.name;
         } catch (err) {
             console.log(`Error in find_user_details : ${err}`);
-            return "Unknown"; 
+            return "Unknown";
         }
     };
 
@@ -79,22 +78,21 @@ export default function Project_m() {
             fetchMemberNames();
         }
     }, [members]);
-    useEffect(()=>{
-        const fetchProjectOwnerName = async()=>{
+
+    useEffect(() => {
+        const fetchProjectOwnerName = async () => {
             const poName = await find_user_details(ProjectOwner);
             setProjectOwnerName(poName);
         };
         fetchProjectOwnerName();
-            
-        },[ProjectOwner]
-    );
+    }, [ProjectOwner]);
 
     return (
         <div className="flex flex-col md:flex-row h-screen bg-gray-100">
             {/* Sidebar Section */}
             <div className="w-full md:w-1/4 bg-cyan-700 text-white p-6 shadow-lg">
                 <h1 className="text-2xl font-bold mb-4">{title || "Loading..."}</h1>
-                <p className="text-sm italic text-gray-200">Owned by: {projectOwnerName }</p>
+                <p className="text-sm italic text-gray-200">Owned by: {projectOwnerName}</p>
 
                 {/* Members List */}
                 <div className="mt-6">
@@ -133,12 +131,21 @@ export default function Project_m() {
                         )}
                     </div>
                 </div>
-                
+
+                {/* Chat Button */}
+                <div className="mt-6">
+                    <Link
+                        to={`/project_m/${projectId}/home/chat`}
+                        className="block text-center bg-white text-cyan-700 font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-gray-200"
+                    >
+                        Chat
+                    </Link>
+                </div>
             </div>
 
             {/* Main Task Area */}
             <div className="flex-1 p-6">
-                <TaskMainBody projectId = {projectId} members = {members} ownerId = {ownerId} memberNames = {memberNames} ProjectOwner = {ProjectOwner} projectOwnerName={projectOwnerName}/>
+                <TaskMainBody projectId={projectId} members={members} ownerId={ownerId} memberNames={memberNames} ProjectOwner={ProjectOwner} projectOwnerName={projectOwnerName} />
             </div>
         </div>
     );
