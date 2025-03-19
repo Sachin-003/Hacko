@@ -1,5 +1,8 @@
 # 🚀 Hacko
 
+## 🌍 Live Demo
+Check out the deployed project: https://hacko4u.onrender.com/
+
 Hacko is a **developer collaboration platform** built using the **MERN stack**. It enables efficient **task management**, **team coordination**, and now supports **group project chat**. 🛠️💡
 
 ## ✨ Features
@@ -50,3 +53,5 @@ cd backend && nodemon server.js
 ```sh
 cd frontend && npm run dev
 ```
+
+
