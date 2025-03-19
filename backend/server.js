@@ -24,7 +24,7 @@ const Message = require("./models/Message")
 const { Server } = require("socket.io");
 const io = new Server(server,{
   cors:{
-    origin : "http://localhost:5173",
+    origin : "https://hacko4u.onrender.com",
     methods : ["GET","POST"],
     credentials : true,
   }
